@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Header from '@/components/layout/Header';
 import { IClient } from '@/models/Client';
-import { Plus, Edit2, Trash2, X, Users, Mail, Phone, Globe, DollarSign, Building } from 'lucide-react';
+import { Plus, Edit2, Trash2, X, Users, Mail, Phone, Globe, Building } from 'lucide-react';
 
 export default function ClientsPage() {
   const [clients, setClients] = useState<IClient[]>([]);
@@ -25,13 +25,19 @@ export default function ClientsPage() {
   });
 
   const groups = [
-    { id: 'all', label: 'All' },
-    { id: 'ungrouped', label: 'Ungrouped' },
-    { id: 'enterprise', label: 'Enterprise' },
-    { id: 'smb', label: 'SMB' },
-    { id: 'startup', label: 'Startup' },
-    { id: 'partner', label: 'Partner' },
+    { id: 'all', label: 'Все' },
+    { id: 'ungrouped', label: 'Без группы' },
+    { id: 'enterprise', label: 'Корпорации' },
+    { id: 'smb', label: 'Малый бизнес' },
+    { id: 'startup', label: 'Стартапы' },
+    { id: 'partner', label: 'Партнёры' },
   ];
+
+  const statusLabels: Record<string, string> = {
+    active: 'Активный',
+    inactive: 'Неактивный',
+    prospect: 'Потенциальный',
+  };
 
   useEffect(() => {
     fetchClients();
@@ -87,7 +93,7 @@ export default function ClientsPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this client?')) return;
+    if (!confirm('Вы уверены, что хотите удалить этого клиента?')) return;
 
     try {
       await fetch(`/api/clients/${id}`, { method: 'DELETE' });
@@ -129,19 +135,23 @@ export default function ClientsPage() {
     }
   };
 
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('ru-RU').format(value) + ' ₸';
+  };
+
   return (
     <>
-      <Header title="Clients" user={{ name: 'Admin User', email: 'admin@test.com' }} />
+      <Header title="Клиенты" user={{ name: 'Администратор', email: 'admin@kairat.kz' }} />
 
       <div className="flex-1 overflow-y-auto p-6">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div>
-            <h2 className="text-2xl font-light text-gray-900">Client Management</h2>
-            <p className="text-gray-500 text-sm mt-1">Manage your customer relationships</p>
+            <h2 className="text-2xl font-light text-gray-900">Управление клиентами</h2>
+            <p className="text-gray-500 text-sm mt-1">Управляйте отношениями с клиентами</p>
           </div>
           <button onClick={handleCreate} className="btn-primary flex items-center gap-2">
             <Plus size={16} />
-            New Client
+            Новый клиент
           </button>
         </div>
 
@@ -224,11 +234,10 @@ export default function ClientsPage() {
 
               <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                 <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium border ${getStatusStyle(client.status)}`}>
-                  {client.status}
+                  {statusLabels[client.status] || client.status}
                 </span>
-                <span className="flex items-center gap-1 text-sm font-medium text-gray-700">
-                  <DollarSign size={14} />
-                  {client.totalValue?.toLocaleString() || 0}
+                <span className="text-sm font-medium text-gray-700">
+                  {formatCurrency(client.totalValue || 0)}
                 </span>
               </div>
             </div>
@@ -237,8 +246,8 @@ export default function ClientsPage() {
           {clients.length === 0 && (
             <div className="col-span-full flex flex-col items-center justify-center py-16 text-gray-400">
               <Users size={48} className="mb-4 opacity-50" />
-              <p className="text-lg font-medium text-gray-500">No clients found</p>
-              <p className="text-sm">Add your first client to get started.</p>
+              <p className="text-lg font-medium text-gray-500">Клиентов не найдено</p>
+              <p className="text-sm">Добавьте первого клиента для начала работы.</p>
             </div>
           )}
         </div>
@@ -254,7 +263,7 @@ export default function ClientsPage() {
           >
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
               <h2 className="text-lg font-semibold text-gray-900">
-                {selectedClient ? 'Edit Client' : 'New Client'}
+                {selectedClient ? 'Редактировать клиента' : 'Новый клиент'}
               </h2>
               <button
                 onClick={() => setShowModal(false)}
@@ -267,7 +276,7 @@ export default function ClientsPage() {
             <form onSubmit={handleSubmit} className="p-6 space-y-4 overflow-y-auto max-h-[calc(90vh-140px)]">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Name *</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Имя *</label>
                   <input
                     type="text"
                     className="input-field"
@@ -275,17 +284,17 @@ export default function ClientsPage() {
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
                     autoFocus
-                    placeholder="John Doe"
+                    placeholder="Нурлан Сериков"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Company</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Компания</label>
                   <input
                     type="text"
                     className="input-field"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    placeholder="Acme Inc."
+                    placeholder="ТОО Казахстан"
                   />
                 </div>
               </div>
@@ -298,74 +307,74 @@ export default function ClientsPage() {
                     className="input-field"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="john@example.com"
+                    placeholder="nurlan@example.kz"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Phone</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Телефон</label>
                   <input
                     type="tel"
                     className="input-field"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="+1 (555) 000-0000"
+                    placeholder="+7 (777) 123-45-67"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">Website</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">Веб-сайт</label>
                 <input
                   type="url"
                   className="input-field"
                   value={formData.website}
                   onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                  placeholder="https://example.com"
+                  placeholder="https://example.kz"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">Address</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">Адрес</label>
                 <input
                   type="text"
                   className="input-field"
                   value={formData.address}
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                  placeholder="123 Main St, City, Country"
+                  placeholder="г. Алматы, ул. Абая 1"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Group</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Группа</label>
                   <select
                     className="input-field"
                     value={formData.group}
                     onChange={(e) => setFormData({ ...formData, group: e.target.value })}
                   >
-                    <option value="ungrouped">Ungrouped</option>
-                    <option value="enterprise">Enterprise</option>
-                    <option value="smb">SMB</option>
-                    <option value="startup">Startup</option>
-                    <option value="partner">Partner</option>
+                    <option value="ungrouped">Без группы</option>
+                    <option value="enterprise">Корпорация</option>
+                    <option value="smb">Малый бизнес</option>
+                    <option value="startup">Стартап</option>
+                    <option value="partner">Партнёр</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Status</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Статус</label>
                   <select
                     className="input-field"
                     value={formData.status}
                     onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                   >
-                    <option value="prospect">Prospect</option>
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
+                    <option value="prospect">Потенциальный</option>
+                    <option value="active">Активный</option>
+                    <option value="inactive">Неактивный</option>
                   </select>
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">Total Value ($)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">Общая сумма (₸)</label>
                 <input
                   type="number"
                   className="input-field"
@@ -376,13 +385,13 @@ export default function ClientsPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">Notes</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">Заметки</label>
                 <textarea
                   className="input-field resize-none"
                   rows={3}
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                  placeholder="Additional notes about this client..."
+                  placeholder="Дополнительные заметки о клиенте..."
                 />
               </div>
             </form>
@@ -393,7 +402,7 @@ export default function ClientsPage() {
                 onClick={() => setShowModal(false)}
                 className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
               >
-                Cancel
+                Отмена
               </button>
               <button
                 onClick={handleSubmit}
@@ -403,10 +412,10 @@ export default function ClientsPage() {
                 {loading ? (
                   <span className="flex items-center gap-2">
                     <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Saving...
+                    Сохранение...
                   </span>
                 ) : (
-                  selectedClient ? 'Update' : 'Create'
+                  selectedClient ? 'Обновить' : 'Создать'
                 )}
               </button>
             </div>

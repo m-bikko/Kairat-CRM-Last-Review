@@ -126,7 +126,7 @@ export default function UploadModal({ onClose, onSuccess }: UploadModalProps) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <h2 className="text-lg font-semibold text-gray-900">Upload Leads</h2>
+          <h2 className="text-lg font-semibold text-gray-900">Загрузка лидов</h2>
           <button
             onClick={onClose}
             className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-400 hover:text-gray-600"
@@ -137,13 +137,13 @@ export default function UploadModal({ onClose, onSuccess }: UploadModalProps) {
 
         <div className="p-6 space-y-5">
           <div className="bg-gray-50 rounded-lg p-4 border border-gray-100">
-            <p className="text-sm text-gray-700 mb-2">Upload a CSV file with the following columns:</p>
+            <p className="text-sm text-gray-700 mb-2">Загрузите CSV файл со следующими колонками:</p>
             <code className="text-xs bg-gray-200 px-2 py-1 rounded text-gray-700">
               name, email, phone, company, value, status, priority, notes
             </code>
             <p className="text-xs text-gray-500 mt-2">
-              Only the <strong>name</strong> column is required. Status values: new, contacted, qualified, proposal, won, lost.
-              Priority values: low, medium, high.
+              Обязательна только колонка <strong>name</strong>. Значения status: new, contacted, qualified, proposal, won, lost.
+              Значения priority: low, medium, high.
             </p>
           </div>
 
@@ -167,13 +167,13 @@ export default function UploadModal({ onClose, onSuccess }: UploadModalProps) {
                 <>
                   <FileText size={24} className="text-indigo-500 mb-2" />
                   <span className="text-sm font-medium text-gray-900">{file.name}</span>
-                  <span className="text-xs text-gray-500 mt-1">Click to change file</span>
+                  <span className="text-xs text-gray-500 mt-1">Нажмите чтобы выбрать другой файл</span>
                 </>
               ) : (
                 <>
                   <Upload size={24} className="text-gray-400 mb-2" />
-                  <span className="text-sm font-medium text-gray-700">Choose CSV file</span>
-                  <span className="text-xs text-gray-500 mt-1">or drag and drop</span>
+                  <span className="text-sm font-medium text-gray-700">Выберите CSV файл</span>
+                  <span className="text-xs text-gray-500 mt-1">или перетащите сюда</span>
                 </>
               )}
             </label>
@@ -181,11 +181,11 @@ export default function UploadModal({ onClose, onSuccess }: UploadModalProps) {
 
           {preview.length > 0 && (
             <div className="space-y-2">
-              <h4 className="text-sm font-medium text-gray-700">Preview (first 5 rows):</h4>
+              <h4 className="text-sm font-medium text-gray-700">Предпросмотр (первые 5 строк):</h4>
               <div className="bg-gray-50 rounded-lg border border-gray-100 divide-y divide-gray-100">
                 {preview.map((row, index) => (
                   <div key={index} className="px-3 py-2 text-sm">
-                    <strong className="text-gray-900">{row.name || 'No name'}</strong>
+                    <strong className="text-gray-900">{row.name || 'Без имени'}</strong>
                     {row.company && <span className="text-gray-500"> - {row.company}</span>}
                     {row.email && <span className="text-gray-400"> ({row.email})</span>}
                   </div>
@@ -208,8 +208,8 @@ export default function UploadModal({ onClose, onSuccess }: UploadModalProps) {
                 <CheckCircle size={16} />
               )}
               <span className="text-sm font-medium">
-                Successfully uploaded {result.created} leads
-                {result.errors > 0 && ` (${result.errors} errors)`}
+                Успешно загружено {result.created} лидов
+                {result.errors > 0 && ` (${result.errors} ошибок)`}
               </span>
             </div>
           )}
@@ -220,7 +220,7 @@ export default function UploadModal({ onClose, onSuccess }: UploadModalProps) {
             onClick={onClose}
             className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
           >
-            Cancel
+            Отмена
           </button>
           <button
             onClick={handleUpload}
@@ -230,12 +230,12 @@ export default function UploadModal({ onClose, onSuccess }: UploadModalProps) {
             {uploading ? (
               <span className="flex items-center gap-2">
                 <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                Uploading...
+                Загрузка...
               </span>
             ) : (
               <span className="flex items-center gap-2">
                 <Upload size={16} />
-                Upload
+                Загрузить
               </span>
             )}
           </button>

@@ -25,7 +25,7 @@ export default function PipelinePage() {
   };
 
   const handleDeleteLead = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this lead?')) return;
+    if (!confirm('Вы уверены, что хотите удалить этот лид?')) return;
 
     try {
       await fetch(`/api/leads/${id}`, { method: 'DELETE' });
@@ -41,20 +41,20 @@ export default function PipelinePage() {
 
   return (
     <>
-      <Header title="Pipeline" user={{ name: 'Admin User', email: 'admin@test.com' }} />
+      <Header title="Воронка" user={{ name: 'Администратор', email: 'admin@kairat.kz' }} />
 
       <div className="flex-1 overflow-hidden p-6 flex flex-col">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-2xl font-light text-gray-900">Sales Pipeline</h2>
-            <p className="text-gray-500 text-sm mt-1">Drag leads between stages to update their status</p>
+            <h2 className="text-2xl font-light text-gray-900">Воронка продаж</h2>
+            <p className="text-gray-500 text-sm mt-1">Перетаскивайте лиды между этапами для обновления статуса</p>
           </div>
           <button
             onClick={() => setShowUploadModal(true)}
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
           >
             <Upload size={16} />
-            Upload CSV
+            Загрузить CSV
           </button>
         </div>
 

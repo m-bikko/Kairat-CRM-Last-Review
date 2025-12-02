@@ -31,7 +31,7 @@ export default function Header({ title, user }: HeaderProps) {
           <Search size={14} className="text-gray-400" />
           <input
             type="text"
-            placeholder="Search..."
+            placeholder="Поиск..."
             className="bg-transparent border-none outline-none text-sm ml-2 w-full text-gray-700 placeholder-gray-400"
           />
         </div>
@@ -48,7 +48,7 @@ export default function Header({ title, user }: HeaderProps) {
               className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
             >
               <LogOut size={16} />
-              <span className="hidden sm:inline">Logout</span>
+              <span className="hidden sm:inline">Выйти</span>
             </button>
           </div>
         )}

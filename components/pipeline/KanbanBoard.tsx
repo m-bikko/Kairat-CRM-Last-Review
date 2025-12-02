@@ -17,12 +17,12 @@ import { ILead } from '@/models/Lead';
 import { Plus } from 'lucide-react';
 
 const columns = [
-  { id: 'new', title: 'New', color: '#3B82F6' },
-  { id: 'contacted', title: 'Contacted', color: '#8B5CF6' },
-  { id: 'qualified', title: 'Qualified', color: '#F59E0B' },
-  { id: 'proposal', title: 'Proposal', color: '#10B981' },
-  { id: 'won', title: 'Won', color: '#059669' },
-  { id: 'lost', title: 'Lost', color: '#EF4444' },
+  { id: 'new', title: 'Новые', color: '#3B82F6' },
+  { id: 'contacted', title: 'Контакт', color: '#8B5CF6' },
+  { id: 'qualified', title: 'Квалификация', color: '#F59E0B' },
+  { id: 'proposal', title: 'Предложение', color: '#10B981' },
+  { id: 'won', title: 'Выиграно', color: '#059669' },
+  { id: 'lost', title: 'Проиграно', color: '#EF4444' },
 ];
 
 interface KanbanBoardProps {
@@ -108,17 +108,17 @@ export default function KanbanBoard({ onCreateLead, onEditLead, onDeleteLead }: 
   const activeLead = activeId ? leads.find((lead) => lead._id === activeId) : null;
 
   const sortButtons = [
-    { id: 'position', label: 'Manual' },
-    { id: 'priority', label: 'Priority' },
-    { id: 'date', label: 'Date' },
-    { id: 'name', label: 'Name' },
+    { id: 'position', label: 'Порядок' },
+    { id: 'priority', label: 'Приоритет' },
+    { id: 'date', label: 'Дата' },
+    { id: 'name', label: 'Имя' },
   ];
 
   return (
     <div className="h-full flex flex-col">
       <div className="flex flex-wrap items-center justify-between mb-6 gap-4">
         <div className="flex items-center gap-3">
-          <span className="text-sm text-gray-500 font-medium">Sort by:</span>
+          <span className="text-sm text-gray-500 font-medium">Сортировка:</span>
           <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
             {sortButtons.map((btn) => (
               <button
@@ -138,7 +138,7 @@ export default function KanbanBoard({ onCreateLead, onEditLead, onDeleteLead }: 
 
         <button onClick={onCreateLead} className="btn-primary flex items-center gap-2">
           <Plus size={16} />
-          New Lead
+          Новый лид
         </button>
       </div>
 

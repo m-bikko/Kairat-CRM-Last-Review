@@ -17,17 +17,17 @@ import {
 } from 'lucide-react';
 
 const menuItems = [
-  { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
-  { name: 'Pipeline', path: '/dashboard/pipeline', icon: KanbanSquare },
-  { name: 'Lists', path: '/dashboard/lists', icon: FileText },
-  { name: 'Clients', path: '/dashboard/clients', icon: Users },
-  { name: 'Employees', path: '/dashboard/employees', icon: Briefcase },
-  { name: 'Finance', path: '/dashboard/finance', icon: DollarSign },
-  { name: 'Billing', path: '/dashboard/billing', icon: CreditCard },
-  { name: 'Calendar', path: '/dashboard/calendar', icon: Calendar },
-  { name: 'Tasks', path: '/dashboard/tasks', icon: CheckSquare },
-  { name: 'Products', path: '/dashboard/products', icon: Package },
-  { name: 'Settings', path: '/dashboard/settings', icon: Settings },
+  { name: 'Главная', path: '/dashboard', icon: LayoutDashboard },
+  { name: 'Воронка', path: '/dashboard/pipeline', icon: KanbanSquare },
+  { name: 'Лиды', path: '/dashboard/lists', icon: FileText },
+  { name: 'Клиенты', path: '/dashboard/clients', icon: Users },
+  { name: 'Сотрудники', path: '/dashboard/employees', icon: Briefcase },
+  { name: 'Финансы', path: '/dashboard/finance', icon: DollarSign },
+  { name: 'Счета', path: '/dashboard/billing', icon: CreditCard },
+  { name: 'Календарь', path: '/dashboard/calendar', icon: Calendar },
+  { name: 'Задачи', path: '/dashboard/tasks', icon: CheckSquare },
+  { name: 'Продукты', path: '/dashboard/products', icon: Package },
+  { name: 'Настройки', path: '/dashboard/settings', icon: Settings },
 ];
 
 export default function Sidebar() {
@@ -69,8 +69,8 @@ export default function Sidebar() {
               <Users size={14} className="text-gray-600" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">Admin User</p>
-              <p className="text-xs text-gray-500 truncate">admin@test.com</p>
+              <p className="text-sm font-medium text-gray-900 truncate">Администратор</p>
+              <p className="text-xs text-gray-500 truncate">admin@kairat.kz</p>
             </div>
           </div>
         </div>

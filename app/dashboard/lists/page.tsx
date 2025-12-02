@@ -45,7 +45,7 @@ export default function ListsPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this list?')) return;
+    if (!confirm('Вы уверены, что хотите удалить этот список?')) return;
 
     try {
       await fetch(`/api/lists/${id}`, { method: 'DELETE' });
@@ -85,17 +85,17 @@ export default function ListsPage() {
 
   return (
     <>
-      <Header title="Lead Lists" user={{ name: 'Admin User', email: 'admin@test.com' }} />
+      <Header title="Лиды" user={{ name: 'Администратор', email: 'admin@kairat.kz' }} />
 
       <div className="flex-1 overflow-y-auto p-6">
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h2 className="text-2xl font-light text-gray-900">Lead Lists</h2>
-            <p className="text-gray-500 text-sm mt-1">Organize your leads into custom lists</p>
+            <h2 className="text-2xl font-light text-gray-900">Списки лидов</h2>
+            <p className="text-gray-500 text-sm mt-1">Организуйте лидов в пользовательские списки</p>
           </div>
           <button onClick={handleCreate} className="btn-primary flex items-center gap-2">
             <Plus size={16} />
-            New List
+            Новый список
           </button>
         </div>
 
@@ -132,9 +132,9 @@ export default function ListsPage() {
 
               <div className="flex items-center justify-between text-xs text-gray-400 mb-3">
                 <span className="flex items-center gap-1">
-                  <span className="font-medium text-gray-600">{list.leadIds?.length || 0}</span> leads
+                  <span className="font-medium text-gray-600">{list.leadIds?.length || 0}</span> лидов
                 </span>
-                <span>{new Date(list.createdAt).toLocaleDateString()}</span>
+                <span>{new Date(list.createdAt).toLocaleDateString('ru-RU')}</span>
               </div>
 
               {list.tags && list.tags.length > 0 && (
@@ -156,8 +156,8 @@ export default function ListsPage() {
           {lists.length === 0 && (
             <div className="col-span-full flex flex-col items-center justify-center py-16 text-gray-400">
               <FolderOpen size={48} className="mb-4 opacity-50" />
-              <p className="text-lg font-medium text-gray-500">No lists yet</p>
-              <p className="text-sm">Create your first list to organize leads.</p>
+              <p className="text-lg font-medium text-gray-500">Списков пока нет</p>
+              <p className="text-sm">Создайте первый список для организации лидов.</p>
             </div>
           )}
         </div>
@@ -173,7 +173,7 @@ export default function ListsPage() {
           >
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
               <h2 className="text-lg font-semibold text-gray-900">
-                {selectedList ? 'Edit List' : 'New List'}
+                {selectedList ? 'Редактировать список' : 'Новый список'}
               </h2>
               <button
                 onClick={() => setShowModal(false)}
@@ -185,7 +185,7 @@ export default function ListsPage() {
 
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">Name *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">Название *</label>
                 <input
                   type="text"
                   className="input-field"
@@ -193,29 +193,29 @@ export default function ListsPage() {
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
                   autoFocus
-                  placeholder="My List"
+                  placeholder="Мой список"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">Description</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">Описание</label>
                 <textarea
                   className="input-field resize-none"
                   rows={3}
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="A brief description of this list..."
+                  placeholder="Краткое описание этого списка..."
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">Tags (comma-separated)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">Теги (через запятую)</label>
                 <input
                   type="text"
                   className="input-field"
                   value={formData.tags}
                   onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
-                  placeholder="urgent, follow-up, cold"
+                  placeholder="срочно, перезвонить, холодный"
                 />
               </div>
             </form>
@@ -226,7 +226,7 @@ export default function ListsPage() {
                 onClick={() => setShowModal(false)}
                 className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
               >
-                Cancel
+                Отмена
               </button>
               <button
                 onClick={handleSubmit}
@@ -236,10 +236,10 @@ export default function ListsPage() {
                 {loading ? (
                   <span className="flex items-center gap-2">
                     <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Saving...
+                    Сохранение...
                   </span>
                 ) : (
-                  selectedList ? 'Update' : 'Create'
+                  selectedList ? 'Обновить' : 'Создать'
                 )}
               </button>
             </div>

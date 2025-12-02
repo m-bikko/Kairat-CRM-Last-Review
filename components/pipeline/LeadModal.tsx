@@ -10,6 +10,12 @@ interface LeadModalProps {
   onSave: () => void;
 }
 
+const priorityLabels: Record<string, string> = {
+  low: 'Низкий',
+  medium: 'Средний',
+  high: 'Высокий',
+};
+
 export default function LeadModal({ lead, onClose, onSave }: LeadModalProps) {
   const [formData, setFormData] = useState({
     name: '',
@@ -73,7 +79,7 @@ export default function LeadModal({ lead, onClose, onSave }: LeadModalProps) {
       >
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
           <h2 className="text-lg font-semibold text-gray-900">
-            {lead ? 'Edit Lead' : 'New Lead'}
+            {lead ? 'Редактировать лид' : 'Новый лид'}
           </h2>
           <button
             onClick={onClose}
@@ -86,7 +92,7 @@ export default function LeadModal({ lead, onClose, onSave }: LeadModalProps) {
         <form onSubmit={handleSubmit} className="p-6 space-y-4 overflow-y-auto max-h-[calc(90vh-140px)]">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Name *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Имя *</label>
               <input
                 type="text"
                 className="input-field"
@@ -94,18 +100,18 @@ export default function LeadModal({ lead, onClose, onSave }: LeadModalProps) {
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 required
                 autoFocus
-                placeholder="John Doe"
+                placeholder="Нурлан Сериков"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Company</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Компания</label>
               <input
                 type="text"
                 className="input-field"
                 value={formData.company}
                 onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                placeholder="Acme Inc."
+                placeholder="ТОО Казахстан"
               />
             </div>
           </div>
@@ -118,25 +124,25 @@ export default function LeadModal({ lead, onClose, onSave }: LeadModalProps) {
                 className="input-field"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                placeholder="john@example.com"
+                placeholder="nurlan@example.kz"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Phone</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Телефон</label>
               <input
                 type="tel"
                 className="input-field"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                placeholder="+1 (555) 000-0000"
+                placeholder="+7 (777) 123-45-67"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Value ($)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Сумма (₸)</label>
               <input
                 type="number"
                 className="input-field"
@@ -147,24 +153,24 @@ export default function LeadModal({ lead, onClose, onSave }: LeadModalProps) {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Status</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Статус</label>
               <select
                 className="input-field"
                 value={formData.status}
                 onChange={(e) => setFormData({ ...formData, status: e.target.value })}
               >
-                <option value="new">New</option>
-                <option value="contacted">Contacted</option>
-                <option value="qualified">Qualified</option>
-                <option value="proposal">Proposal</option>
-                <option value="won">Won</option>
-                <option value="lost">Lost</option>
+                <option value="new">Новый</option>
+                <option value="contacted">Контакт</option>
+                <option value="qualified">Квалификация</option>
+                <option value="proposal">Предложение</option>
+                <option value="won">Выиграно</option>
+                <option value="lost">Проиграно</option>
               </select>
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Priority</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Приоритет</label>
             <div className="flex gap-2">
               {['low', 'medium', 'high'].map((p) => (
                 <button
@@ -181,20 +187,20 @@ export default function LeadModal({ lead, onClose, onSave }: LeadModalProps) {
                       : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'
                   }`}
                 >
-                  {p.charAt(0).toUpperCase() + p.slice(1)}
+                  {priorityLabels[p]}
                 </button>
               ))}
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Notes</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Заметки</label>
             <textarea
               className="input-field resize-none"
               rows={3}
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-              placeholder="Add any notes about this lead..."
+              placeholder="Добавьте заметки о лиде..."
             />
           </div>
         </form>
@@ -205,7 +211,7 @@ export default function LeadModal({ lead, onClose, onSave }: LeadModalProps) {
             onClick={onClose}
             className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
           >
-            Cancel
+            Отмена
           </button>
           <button
             onClick={handleSubmit}
@@ -215,10 +221,10 @@ export default function LeadModal({ lead, onClose, onSave }: LeadModalProps) {
             {loading ? (
               <span className="flex items-center gap-2">
                 <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                Saving...
+                Сохранение...
               </span>
             ) : (
-              lead ? 'Update Lead' : 'Create Lead'
+              lead ? 'Обновить' : 'Создать'
             )}
           </button>
         </div>
