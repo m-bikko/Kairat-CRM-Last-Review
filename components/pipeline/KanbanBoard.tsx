@@ -82,7 +82,7 @@ export default function KanbanBoard({ onCreateLead, onEditLead, onDeleteLead }: 
     const activeLead = leads.find((lead) => lead._id === activeId);
     if (!activeLead) return;
 
-    const newStatus = columns.find((col) => col.id === overId)?.id || activeLead.status;
+    const newStatus = (columns.find((col) => col.id === overId)?.id || activeLead.status) as ILead['status'];
 
     if (newStatus !== activeLead.status) {
       try {
@@ -94,7 +94,7 @@ export default function KanbanBoard({ onCreateLead, onEditLead, onDeleteLead }: 
 
         setLeads((prev) =>
           prev.map((lead) =>
-            lead._id === activeId ? { ...lead, status: newStatus } : lead
+            lead._id === activeId ? { ...lead, status: newStatus } as ILead : lead
           )
         );
       } catch (error) {

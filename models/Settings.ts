@@ -1,7 +1,6 @@
 import mongoose, { Document, Model, Schema } from 'mongoose';
 
 export interface ISettings extends Document {
-  _id: string;
   userId: string;
   profile: {
     firstName: string;

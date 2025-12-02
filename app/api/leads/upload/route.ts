@@ -19,8 +19,8 @@ export async function POST(request: NextRequest) {
 
     await dbConnect();
 
-    const createdLeads = [];
-    const errors = [];
+    const createdLeads: any[] = [];
+    const errors: { row: number; error: string }[] = [];
 
     for (let i = 0; i < leads.length; i++) {
       const leadData = leads[i];
