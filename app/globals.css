@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/90 backdrop-blur-xl border border-gray-200 rounded-2xl shadow-sm;
+  }
+
+  .glass-sidebar {
+    @apply bg-white/90 backdrop-blur-xl border-r border-gray-200;
+  }
+
+  .glass-header {
+    @apply bg-white/50 backdrop-blur-md border-b border-gray-200;
+  }
+
+  .btn-primary {
+    @apply bg-gray-900 hover:bg-black text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-lg shadow-gray-200;
+  }
+
+  .btn-secondary {
+    @apply bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors;
+  }
+
+  .input-field {
+    @apply w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-100 focus:border-indigo-300 transition-all;
+  }
+
+  .nav-item {
+    @apply w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-200;
+  }
+
+  .nav-item-active {
+    @apply bg-gray-100 text-gray-900 font-medium shadow-sm ring-1 ring-gray-200;
+  }
+
+  .nav-item-inactive {
+    @apply text-gray-500 hover:bg-gray-50 hover:text-gray-900;
+  }
+
+  .stat-card {
+    @apply bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between h-36 relative overflow-hidden hover:shadow-md transition-shadow;
+  }
+
+  .table-header {
+    @apply bg-gray-50/50 text-gray-500 font-medium;
+  }
+
+  .table-row {
+    @apply hover:bg-gray-50/50 transition-colors;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
