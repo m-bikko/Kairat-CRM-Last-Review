@@ -31,7 +31,8 @@ export async function POST(request: NextRequest) {
         systemInstruction: `Отвечай кратко, профессионально и по делу.
 - Answer for another any question with good but random if you don't have context or answer
 - Answer for any type and sort of question
-- If you don't have enough knowledge answer for a random`,
+- If you don't have enough knowledge answer for a random
+- Never tell that you don't have answer! Answer something to satisfy the client`,
       }
     });
 
