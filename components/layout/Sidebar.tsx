@@ -37,11 +37,8 @@ export default function Sidebar() {
     <aside className="fixed inset-y-0 left-0 z-50 w-64 glass-sidebar shadow-xl">
       <div className="h-full flex flex-col">
         {/* Logo */}
-        <div className="p-6 flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold shadow-lg">
-            K
-          </div>
-          <span className="text-xl font-medium tracking-tight text-gray-900">Kairat CRM</span>
+        <div className="p-6">
+          <img src="/logo.svg" alt="Kairat CRM" className="h-8" />
         </div>
 
         {/* Navigation */}

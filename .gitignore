@@ -1,3 +1,8 @@
+/.next
+/node_modules
+.env
+/example-UI
+
 .next
 node_modules
 .env

@@ -45,14 +45,9 @@ export default function LoginPage() {
       <div className="w-full max-w-md bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl p-10 animate-fade-in">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl mx-auto mb-4 shadow-lg">
-            K
-          </div>
-          <h1 className="text-2xl font-medium text-gray-900 tracking-tight">
-            Kairat CRM
-          </h1>
+          <img src="/logo.svg" alt="Kairat CRM" className="h-10 mx-auto mb-4" />
           <p className="text-gray-500 text-sm mt-1">
-            Sign in to your account
+            Войдите в свой аккаунт
           </p>
         </div>
 
