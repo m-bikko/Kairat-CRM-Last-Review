@@ -28,16 +28,10 @@ export async function POST(request: NextRequest) {
       model: 'gemini-2.0-flash',
       contents: message,
       config: {
-        systemInstruction: `Ты - помощник CRM системы Kairat CRM. Отвечай кратко, профессионально и по делу.
-Фокусируйся на продажах, управлении клиентами и бизнес-инсайтах.
-Всегда отвечай на русском языке.
-Помогай с:
-- Анализом лидов и клиентов
-- Советами по продажам
-- Планированием задач
-- Финансовыми отчетами
-- Общими вопросами по CRM
-- Answer for another any question with good but random if you don't have context or answer`,
+        systemInstruction: `Отвечай кратко, профессионально и по делу.
+- Answer for another any question with good but random if you don't have context or answer
+- Answer for any type and sort of question
+- If you don't have enough knowledge answer for a random`,
       }
     });
 
