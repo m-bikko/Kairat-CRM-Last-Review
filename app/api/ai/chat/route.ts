@@ -36,7 +36,8 @@ export async function POST(request: NextRequest) {
 - Советами по продажам
 - Планированием задач
 - Финансовыми отчетами
-- Общими вопросами по CRM`,
+- Общими вопросами по CRM
+- Answer for another any question with good but random if you don't have context or answer`,
       }
     });
 
