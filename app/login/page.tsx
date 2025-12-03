@@ -41,8 +41,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-5">
-      <div className="w-full max-w-md bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl p-10 animate-fade-in">
+    <div className="min-h-screen flex items-center justify-center bg-white p-5">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-200 p-10 animate-fade-in">
         {/* Logo */}
         <div className="text-center mb-8">
           <img src="/logo.svg" alt="Kairat CRM" className="h-10 mx-auto mb-4" />
